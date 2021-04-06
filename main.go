@@ -1,10 +1,8 @@
 package main
 
-
 import (
 	"github.com/gin-gonic/gin"
-	//"dcas/route"
-	"dcas/utils/log"
+
 	"dcas/service/shorturl"
 )
 
@@ -13,9 +11,6 @@ func main() {
 
 
 	shorturl.Index()
-
-	log.Info(1,2,3)
-	log.Info(1,2,3)
 
 	//return
 	//server,err := route.Init()

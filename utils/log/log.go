@@ -5,6 +5,7 @@ import (
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
+	"dcas/config"
 )
 
 
@@ -17,23 +18,19 @@ var logger *zap.Logger
 
 
 func init() {
-	println(1)
-	logger = getLogger("./logs/main.log", zapcore.DebugLevel, 128, 30, 7, true, "Main")
+	logFilePath,err := config.Get("logFilePath")
+	if err == nil {
+		logger = getLogger(logFilePath, zapcore.DebugLevel, 1, 30, 7, true, "Main")
+	}
 }
 
 func Info(msg string, args ...interface{}) {
 
-	logger.Info(msg,args...)
+	logger.Info(msg)
 
-	asdasd(msg, args...)
 
 }
 
-
-
-func asdasd(msg string, ss ...a){
-
-}
 
 
 /**
@@ -86,7 +83,7 @@ func getLogger(filePath string, level zapcore.Level, maxSize int, maxBackups int
 	// 开启文件及行号
 	development := zap.Development()
 	// 设置初始化字段
-	filed := zap.Fields(zap.String("serviceName", "serviceName"))
+	filed := zap.Fields(zap.String("type", "default"))
 	// 构造日志
 	logger := zap.New(core, caller, development, filed)
 
