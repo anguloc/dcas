@@ -1,37 +1,28 @@
 package log
 
 import (
+	"dcas/config"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"os"
-	"dcas/config"
 )
-
-
-type a struct {
-	ass string
-}
 
 var logger *zap.Logger
 
-
-
 func init() {
-	logFilePath,err := config.Get("logFilePath")
-	if err == nil {
-		logger = getLogger(logFilePath, zapcore.DebugLevel, 1, 30, 7, true, "Main")
+	if config.Conf.Log.FilePath == "" {
+		return
 	}
+	logger = getLogger(config.Conf.Log.FilePath, zapcore.DebugLevel, 1, 30, 7, true, "Main")
 }
 
 func Info(msg string, args ...interface{}) {
-
+	if logger == nil {
+		return
+	}
 	logger.Info(msg)
-
-
 }
-
-
 
 /**
  * 获取日志

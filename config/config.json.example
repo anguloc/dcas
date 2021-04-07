@@ -1,0 +1,17 @@
+{
+    "log": {
+        "type": "file",
+        "filePath": "temp/logs/app.log"
+    },
+    "mysql": {
+        "host": "127.0.0.1",
+        "port": "3306",
+        "database": "database",
+        "username": "root",
+        "password": "root"
+    },
+    "redis": {
+        "host": "127.0.0.1",
+        "port": "6379"
+    }
+}
