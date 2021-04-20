@@ -26,15 +26,22 @@ type Redis struct {
 	Password string `json:"password"`
 }
 
+type Server struct {
+	Host string `json:"host"`
+	Port string `json:"port"`
+	Type string `json:"type"`
+}
+
 type Config struct {
-	Log   Log   `json:"log"`
-	Mysql Mysql `json:"mysql"`
-	Redis Redis `json:"redis"`
+	Log    Log    `json:"log"`
+	Mysql  Mysql  `json:"mysql"`
+	Redis  Redis  `json:"redis"`
+	Server Server `json:"server"`
 }
 
 var Conf *Config
 
-func init()  {
+func init() {
 	if Conf != nil {
 		return
 	}

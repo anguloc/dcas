@@ -1,4 +1,11 @@
 {
+    "server":
+        {
+            "host": "0.0.0.0",
+            "port": 8341,
+            "type": "http"
+        }
+    ,
     "log": {
         "type": "file",
         "filePath": "temp/logs/app.log"

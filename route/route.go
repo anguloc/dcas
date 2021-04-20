@@ -1,21 +1,19 @@
 package route
 
 import (
-	//"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin"
+	"dcas/service/shorturl"
 )
 
-type Server struct {
-	GinEngine *gin.Engine
-}
 
 // initRoute ...a
-func Init() (*Server,error){
-	server := new(Server)
+func InitRoute(g *gin.Engine) (error){
+	register(g)
 
-	server.GinEngine = gin.Default()
-	server.GinEngine.Use(gin.Recovery())
-	//server.GinEngine.Use(gin.Logger())
+	return nil
+}
 
-	return server,nil
+func register(g *gin.Engine)  {
+	g.GET("/", shorturl.Index);
+	g.POST("/", shorturl.Gen);
 }

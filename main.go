@@ -1,32 +1,36 @@
 package main
 
 import (
+	"dcas/config"
+	"dcas/route"
+	"dcas/utils/log"
 	"github.com/gin-gonic/gin"
-
-	"dcas/service/shorturl"
 )
 
 func main() {
 	gin.SetMode(gin.DebugMode)
 
+	g := gin.Default()
+	g.Use(gin.Recovery())
 
-	shorturl.Index()
+	g.LoadHTMLFiles("public/**")
 
-	//return
-	//server,err := route.Init()
-	//if err != nil {
-	//	return err
-	//}
-	//server.GinEngine.Run()
-	//
-	//println(server)
-	//
-	//return
-	//r := gin.Default()
-	//r.GET("/ping", func(c *gin.Context) {
-	//	c.JSON(200, gin.H{
-	//		"message": "pong",
-	//	})
-	//})
-	//r.Run() // listen and serve on 0.0.0.0:8080
+	err := route.InitRoute(g)
+	if err != nil {
+		log.Fatal("init route fail:" + err.Error())
+		return
+	}
+
+	port := config.Conf.Server.Port
+
+	if port == "" {
+		log.Fatal("invalid port")
+		return
+	}
+
+	err = g.Run(":" + port)
+	if err != nil {
+		log.Fatal("init route fail:" + err.Error())
+		return
+	}
 }
