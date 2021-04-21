@@ -1,7 +1,7 @@
 package shorturl
 
 import (
-	"dcas/utils/log"
+	"dcas/internal/log"
 	"github.com/gin-gonic/gin"
 )
 

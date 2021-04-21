@@ -15,7 +15,9 @@
         "port": "3306",
         "database": "database",
         "username": "root",
-        "password": "root"
+        "max_idel_conn": 10,
+        "max_open_conn": 12,
+        "conn_max_lifetime": 600
     },
     "redis": {
         "host": "127.0.0.1",

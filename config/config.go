@@ -18,6 +18,9 @@ type Mysql struct {
 	Database string `json:"database"`
 	Username string `json:"username"`
 	Password string `json:"password"`
+	MaxIdelConn int `json:"max_idel_conn"`
+	MaxOpenConn int `json:"max_open_conn"`
+	ConnMaxLifetime int `json:"conn_max_lifetime"`
 }
 
 type Redis struct {

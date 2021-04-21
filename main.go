@@ -3,7 +3,7 @@ package main
 import (
 	"dcas/config"
 	"dcas/route"
-	"dcas/utils/log"
+	"dcas/internal/log"
 	"github.com/gin-gonic/gin"
 )
 
