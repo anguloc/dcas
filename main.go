@@ -13,7 +13,7 @@ func main() {
 	g := gin.Default()
 	g.Use(gin.Recovery())
 
-	g.LoadHTMLFiles("public/**")
+	g.LoadHTMLGlob("public/*")
 
 	err := route.InitRoute(g)
 	if err != nil {

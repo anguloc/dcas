@@ -16,4 +16,5 @@ func InitRoute(g *gin.Engine) (error){
 func register(g *gin.Engine)  {
 	g.GET("/", shorturl.Index);
 	g.POST("/", shorturl.Gen);
+	g.StaticFile("/favicon.ico", "./public/favicon.ico");
 }
