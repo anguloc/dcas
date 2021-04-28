@@ -1,12 +1,12 @@
 package dao
 
 import (
+	"dcas/config"
+	"dcas/internal/log"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"time"
-	"dcas/internal/log"
-	"dcas/config"
 )
 
 var DB *gorm.DB
@@ -23,14 +23,12 @@ func InitDB() (err error) {
 	log.Info("connect to mysql %s", dsn)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Error("connect db err:" + err.Error(), )
-		return err
+		panic("connect database fail, error:" + err.Error())
 	}
 
 	sqlDB, err := db.DB()
 	if err != nil {
-		log.Error("get sqlDB err:%v", err)
-		return err
+		panic("connect database fail!, error:" + err.Error())
 	}
 
 	sqlDB.SetMaxIdleConns(config.Conf.Mysql.MaxIdelConn)
