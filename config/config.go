@@ -40,6 +40,7 @@ type Config struct {
 	Mysql  Mysql  `json:"mysql"`
 	Redis  Redis  `json:"redis"`
 	Server Server `json:"server"`
+	ShortDomain string `json:"short_domain"`
 }
 
 var Conf *Config

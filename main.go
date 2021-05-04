@@ -2,24 +2,31 @@ package main
 
 import (
 	"dcas/config"
-	"dcas/route"
+	"dcas/internal/dao"
 	"dcas/internal/log"
+	"dcas/route"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	var err error
+
+	dao.InitDB()
+
 	gin.SetMode(gin.DebugMode)
 
 	g := gin.Default()
 	g.Use(gin.Recovery())
 
-	g.LoadHTMLGlob("public/*")
+	g.Static("static", "public/static")
+	g.LoadHTMLFiles("public/index.html")
 
-	err := route.InitRoute(g)
+	err = route.InitRoute(g)
 	if err != nil {
 		log.Fatal("init route fail:" + err.Error())
 		return
 	}
+
 
 	port := config.Conf.Server.Port
 
@@ -28,7 +35,7 @@ func main() {
 		return
 	}
 
-	err = g.Run(":" + port)
+	err = g.Run("localhost:" + port)
 	if err != nil {
 		log.Fatal("init route fail:" + err.Error())
 		return

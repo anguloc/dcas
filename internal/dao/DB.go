@@ -11,7 +11,7 @@ import (
 
 var DB *gorm.DB
 
-func InitDB() (err error) {
+func InitDB() {
 	log.Info("mysql init")
 	//dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
@@ -20,7 +20,7 @@ func InitDB() (err error) {
 		config.Conf.Mysql.Host,
 		config.Conf.Mysql.Port,
 		config.Conf.Mysql.Database)
-	log.Info("connect to mysql %s", dsn)
+	//log.Info("connect to mysql " + dsn)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("connect database fail, error:" + err.Error())
@@ -38,5 +38,4 @@ func InitDB() (err error) {
 	sqlDB.SetConnMaxLifetime(time.Second * time.Duration(config.Conf.Mysql.ConnMaxLifetime))
 
 	DB = db
-	return nil
 }
